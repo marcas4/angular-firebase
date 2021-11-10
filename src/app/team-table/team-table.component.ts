@@ -9,7 +9,7 @@ import { TeamService, TeamsTableHeaders } from '../services/team.service';
   selector: 'app-team-table',
   templateUrl: './team-table.component.html',
   styleUrls: ['./team-table.component.scss'],
-})
+}) 
 export class TeamTableComponent implements OnInit {
   public teams$ = new Observable<Team[]>();
   public tableHeaders = TeamsTableHeaders;
@@ -27,6 +27,7 @@ export class TeamTableComponent implements OnInit {
             country: Country.Argentina,
             player: null!
           };
+          this.teamService.addTeam(team);
         }
       });
   }
