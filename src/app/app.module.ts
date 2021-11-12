@@ -11,6 +11,8 @@ import { PlayerService } from './services/player.service';
 import { TeamService } from './services/team.service';
 import { TeamTableComponent } from './team-table/team-table.component';
 import { PayerTableComponent } from './payer-table/payer-table.component';
+import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -18,10 +20,12 @@ import { PayerTableComponent } from './payer-table/payer-table.component';
   declarations: [
     AppComponent,
     TeamTableComponent,
-    PayerTableComponent
+    PayerTableComponent,
+    PlayerDialogComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AppRoutingModule
