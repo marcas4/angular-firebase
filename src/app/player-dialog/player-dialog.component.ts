@@ -20,7 +20,7 @@ export class PlayerDialogComponent implements OnInit {
     label: key,
     key: Country[key as CategoryType],
   }));
-  
+
   public squadNumber = Object.keys(SquadNumber)
     .slice(Object.keys(SquadNumber).length / 2)
     .map((key: any) => ({
@@ -54,19 +54,19 @@ export class PlayerDialogComponent implements OnInit {
       ...this.team,
       players: [
         ...(this.team.player ? this.team.player : []),
-        playerFormValueKey,
-      ],
-    };
+        playerFormValueKey
+      ]
+    }
     this.teamService.editTeam(formattedTeam);
   }
 
   onSubmit(playerForm: NgForm) {
-    const playerFormValue = {...playerForm.value};
+    const playerFormValue = { ...playerForm.value };
     if (playerForm.valid) {
-      playerFormValue.leftFooted = playerFormValue.leftFooted === '' ? false : playerFormValue.leftFooted;
+      playerFormValue.leftFooted =
+        playerFormValue.leftFooted === '' ? false : playerFormValue.leftFooted;
     }
     this.newPlayer(playerFormValue);
     window.location.replace('#');
   }
-
 }

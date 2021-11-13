@@ -28,12 +28,12 @@ export class PayerTableComponent implements OnInit {
     weight: 0,
     height: 0,
     nationality: "",
-    leftFooter: false
+    leftFooted: false
     }
     this.showModal = true;
     this.selectedPlayer = playervacio;
     setTimeout(() => {
-      window.location.replace('#open');
+      window.location.replace('#open-modal');
     }, 0);
   }
 }
