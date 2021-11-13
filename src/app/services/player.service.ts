@@ -26,7 +26,7 @@ export class PlayerService {
     return this.playersDb.push(player);
   }
 
-  deletePlayer(id: string) {
+  deletePlayer(id: string | undefined) {
     this.db.list('/players').remove(id);
   }
 

@@ -1,8 +1,9 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Player } from '../interfaces/player';
 import { PlayerService } from '../services/player.service';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-payer-table',
@@ -14,7 +15,7 @@ export class PayerTableComponent implements OnInit {
   public selectedPlayer!: Player;
   public showModal = false;
 
-  constructor(private playerService: PlayerService) {}
+  constructor(private playerService: PlayerService, private teamService: TeamService) {}
 
   ngOnInit(): void {
     this.players$ = this.playerService.getPlayers();
@@ -43,6 +44,21 @@ export class PayerTableComponent implements OnInit {
     setTimeout(() => {
       window.location.replace('#open-modal');
     }, 0);
+  }
+
+  deletePlayer(player: Player) {
+    this.teamService
+      .getTeam()
+      .pipe(take(1))
+      .subscribe(teams => {
+        const moddifiedPlayers = teams[0].player ? teams[0].player.filter((p: any) => p.key !== player.$key) : teams[0].player;
+        const formattedTeam = {
+          ...teams[0],
+          players: [...moddifiedPlayers]
+        };
+        this.playerService.deletePlayer(player.$key);
+        this.teamService.editTeam(formattedTeam);
+      });
   }
 
   closeDialog() {

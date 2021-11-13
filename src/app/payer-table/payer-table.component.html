@@ -33,12 +33,13 @@
                     <th>{{player.leftFooted}}</th>
                     <th>
                         <button class="submit" (click)="editPlayer(player)">Edit</button>
-                        <button>Delete</button>
+                        <button class="submit" (click)="deletePlayer(player)">Delete</button>
                     </th>
                 </tr>
             </tbody>
         </table>
     </div>
 </section>
-<app-player-dialog></app-player-dialog>
+<app-player-dialog *ngIf="showModal" (closeDialog)="closeDialog()" ></app-player-dialog>
 
+ 

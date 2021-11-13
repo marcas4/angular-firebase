@@ -69,7 +69,7 @@ export class PlayerDialogComponent implements OnInit {
     delete playerFormValueWithFormattedKey.$key;
     const moddifiedPlayers = this.team.player
       ? this.team.player.map(player => {
-          return player.$key === this.player.$key ? playerFormValueWithFormattedKey : player 
+          return player.$key === this.player.$key ? playerFormValueWithFormattedKey : player; 
       }) : this.team.player;
     const formattedTeam = {
       ...this.team,
@@ -83,7 +83,11 @@ export class PlayerDialogComponent implements OnInit {
     const playerFormValue = { ...playerForm.value };
     if (playerForm.valid) {
       playerFormValue.leftFooted =
-        playerFormValue.leftFooted === '' ? false : playerFormValue.leftFooted;
+        (playerFormValue.leftFooted === '' || playerFormValue.leftFooted === undefined) ? false : playerFormValue.leftFooted;
+    } else{
+      if(playerFormValue.leftFooted === null || playerFormValue.leftFooted === undefined) {
+        playerFormValue.leftFooted = false;
+      }
     }
     if(this.player) {
       this.editPlayer(playerFormValue);
@@ -91,6 +95,10 @@ export class PlayerDialogComponent implements OnInit {
       this.newPlayer(playerFormValue);
     }
     window.location.replace('#');
+  }
+
+  onClose() {
+    this.closeDialog.emit(true);
   }
 
 }
